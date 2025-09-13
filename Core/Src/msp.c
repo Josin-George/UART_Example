@@ -25,8 +25,9 @@ void HAL_MspInit(void)
 {
 	 GPIO_InitTypeDef gpio_uart;
 	 //here we will be doing the low level initialisation of USART2 peripheral
-	 //1.enable the clock for usart2 peripheral
-	 __HAL_RCC_USART1_CLK_ENABLE();
+	 //1.enable the clock for usart2 peripheral as well as GPIOA peripheral
+	 __HAL_RCC_USART2_CLK_ENABLE();
+	 __HAL_RCC_GPIOA_CLK_ENABLE();
 	 //2.do the pin muxing configurations
 	 gpio_uart.Pin = GPIO_PIN_2;
 	 gpio_uart.Mode = GPIO_MODE_AF_PP ;

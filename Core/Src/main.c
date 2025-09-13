@@ -4,21 +4,32 @@
  *  Created on: Sep 8, 2025
  *      Author: lenovo
  */
+#include "string.h"
 #include "stm32f4xx_hal.h"
 #include "main.h"
 
 void SystemClockConfig(void);
-void UART_Init(void);
+void UART2_Init(void);
 void Error_handler(void);
 
 UART_HandleTypeDef huart2;
 
+char *user_data = "The application is running\r\n";
 
 int main(void){
 
+
 	HAL_Init();
 	SystemClockConfig();
-	UART_Init();
+	UART2_Init();
+
+	uint16_t len_of_data = strlen(user_data);
+
+	HAL_UART_Transmit(&huart2,(uint8_t*)user_data,len_of_data,HAL_MAX_DELAY) ;
+
+
+		while(1);
+
 
 
 	return 0;
@@ -28,7 +39,7 @@ void SystemClockConfig(void){
 
 }
 
-void UART_Init(void){
+void UART2_Init(void){
 	huart2.Instance = USART2;
 	huart2.Init.BaudRate =115200;
 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
